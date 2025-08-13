@@ -30,8 +30,13 @@
  GCC does provides these definitions in stdint.h, but it may require some
  modifications on other architectures.
 --------------------------------------------------------------------------*/
-#define IDXTYPEWIDTH 32
-
+#if   defined(IDXTYPE_INT64)    /* YSe -- Added external control*/
+#   define IDXTYPEWIDTH 64
+#elif defined(IDXTYPE_INT)
+#   define IDXTYPEWIDTH 32
+#else
+#   define IDXTYPEWIDTH 32
+#endif
 
 /*--------------------------------------------------------------------------
  Specifies the data type that will hold floating-point style information.
@@ -167,6 +172,16 @@ typedef __int64 int64_t;
 /*------------------------------------------------------------------------
 * Function prototypes 
 *-------------------------------------------------------------------------*/
+
+#ifdef _WINDLL
+#define METIS_API(type) __declspec(dllexport) type __cdecl
+#elif defined(__cdecl)
+#define METIS_API(type) type __cdecl
+#else
+#define METIS_API(type) type
+#endif
+
+
 
 #ifdef __cplusplus
 extern "C" {
