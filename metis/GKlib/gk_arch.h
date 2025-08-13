@@ -31,10 +31,16 @@
 #endif
 
 
-#ifdef __MSC__ 
-  #include "ms_stdint.h"
-  #include "ms_inttypes.h"
-  #include "ms_stat.h"
+#ifdef __MSC__
+  /* --- Modified for recent versions of MSC */
+  #if (_MSC_VER < 1600)
+    #include "ms_stdint.h"
+    #include "ms_inttypes.h"
+    #include "ms_stat.h"
+  #else
+    #include <stdint.h>
+    #include <inttypes.h>
+  #endif
 #else
 #ifndef SUNOS
   #include <stdint.h>
