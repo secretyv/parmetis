@@ -92,7 +92,9 @@ void gkfooo() { return; }
 #include <string.h>
 
 #if defined(__MINGW32_VERSION) || defined(_MSC_VER)
-#define strcasecmp stricmp
+# define strcasecmp stricmp
+#else
+# include <strings.h>
 #endif
 
 #if defined HAVE_LANGINFO_H || defined HAVE_LANGINFO_CODESET || defined _LIBC
