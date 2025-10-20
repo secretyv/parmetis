@@ -36,7 +36,11 @@
 #include <float.h>
 #include <time.h>
 #include <string.h>
-#include <strings.h>
+#if defined(__MINGW32_VERSION) || defined(_MSC_VER)
+# /* Empty, just to mimic gkregex.c    */
+#else
+# include <strings.h>
+#endif
 #include <limits.h>
 #include <signal.h>
 #include <setjmp.h>
